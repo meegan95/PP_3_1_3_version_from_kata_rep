@@ -25,8 +25,6 @@ public class User {
     private int yearOfBirth;
     @Column(name = "password")
     private String password;
-//    @Column(name = "role")
-//    private String role;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(
@@ -50,16 +48,19 @@ public class User {
         return roles;
     }
 
-//    public void setRole(String role) {
-//        this.role = role;
-//    }
-
     public User() {
     }
 
     public User(String username, int yearOfBirth) {
         this.username = username;
         this.yearOfBirth = yearOfBirth;
+    }
+
+    public User(String username, int yearOfBirth, String password, Set<Role> roles) {
+        this.username = username;
+        this.yearOfBirth = yearOfBirth;
+        this.password = password;
+        this.roles = roles;
     }
 
     public int getId() {
