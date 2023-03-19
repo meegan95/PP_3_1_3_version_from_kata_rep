@@ -2,12 +2,10 @@ package ru.kata.spring.boot_security.demo.security;
 
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import ru.kata.spring.boot_security.demo.models.User;
 
 
 import java.util.Collection;
-import java.util.Collections;
 
 public class UsersDetails implements org.springframework.security.core.userdetails.UserDetails {
 
@@ -20,7 +18,6 @@ public class UsersDetails implements org.springframework.security.core.userdetai
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRole();
-//                Collections.singletonList(new SimpleGrantedAuthority(user.getRole().toString()));
     }
 
     @Override
@@ -52,7 +49,8 @@ public class UsersDetails implements org.springframework.security.core.userdetai
     public boolean isEnabled() {
         return true;
     }
-    public User getUser(){
+
+    public User getUser() {
         return this.user;
     }
 }

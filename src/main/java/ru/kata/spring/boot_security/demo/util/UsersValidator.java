@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.services.UsersDetailsService;
 @Component
 public class UsersValidator implements Validator {
     private final UsersDetailsService usersDetailsService;
+
     @Autowired
     public UsersValidator(UsersDetailsService usersDetailsService) {
         this.usersDetailsService = usersDetailsService;
@@ -27,9 +28,9 @@ public class UsersValidator implements Validator {
         User user = (User) target;
         try {
             usersDetailsService.loadUserByUsername(user.getUsername());
-        } catch (UsernameNotFoundException ignored){
+        } catch (UsernameNotFoundException ignored) {
             return;
         }
-        errors.rejectValue("username","","Пользовтель с таким именем уже существует");
+        errors.rejectValue("username", "", "Пользовтель с таким именем уже существует");
     }
 }

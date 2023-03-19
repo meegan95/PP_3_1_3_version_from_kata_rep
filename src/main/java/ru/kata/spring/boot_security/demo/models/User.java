@@ -37,8 +37,9 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
     public void addRole(Role role) {
-        if(roles == null) {
+        if (roles == null) {
             roles = new HashSet<>();
         }
         roles.add(role);
