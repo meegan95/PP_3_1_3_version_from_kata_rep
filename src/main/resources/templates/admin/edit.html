@@ -23,6 +23,12 @@ Edit user:
   <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password with error</div>
   <br/>
   <input type="submit" value="Update user!"/>
+  <br/>
+  <a th:href="@{/admin}">Выйти на главную</a>
+</form>
+
+<form th:action="@{/logout}" th:method="POST">
+  <input type="submit" value="Logout" />
 </form>
 
 </body>
