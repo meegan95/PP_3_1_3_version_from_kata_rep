@@ -5,9 +5,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users",
+        uniqueConstraints = {@UniqueConstraint(columnNames = "username")})      // уникальный логин
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +25,34 @@ public class User {
     private int yearOfBirth;
     @Column(name = "password")
     private String password;
-    @Column(name = "role")
-    private String role;
+//    @Column(name = "role")
+//    private String role;
 
-    public String getRole() {
-        return role;
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+    public void addRole(Role role) {
+        if(roles == null) {
+            roles = new HashSet<>();
+        }
+        roles.add(role);
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public Set<Role> getRole() {
+        return roles;
     }
+
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 
     public User() {
     }

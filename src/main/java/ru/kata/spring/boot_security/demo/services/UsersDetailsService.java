@@ -30,4 +30,5 @@ public class UsersDetailsService implements UserDetailsService {
         }
         return new UsersDetails(user.get());
     }
+
 }
