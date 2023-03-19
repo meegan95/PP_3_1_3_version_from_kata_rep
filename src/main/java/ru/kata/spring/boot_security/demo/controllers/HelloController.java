@@ -32,9 +32,9 @@ public class HelloController {
         return "hello";
     }
 
-    @GetMapping("/admin")
-    public String adminPage(){
-        adminService.doAdminStuff();
-        return "admin";
-    }
+//    @GetMapping("/admin")
+//    public String adminPage(){
+//        adminService.doAdminStuff();
+//        return "admin";
+//    }
 }
