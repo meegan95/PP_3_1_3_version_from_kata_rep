@@ -3,11 +3,11 @@ package ru.kata.spring.boot_security.demo.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import ru.kata.spring.boot_security.demo.models.User;
-
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class UsersDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class UsersDetails implements UserDetails {
 
     private final User user;
 

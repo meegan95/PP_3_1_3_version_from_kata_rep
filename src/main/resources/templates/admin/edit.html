@@ -22,6 +22,20 @@ Edit user:
   <input type="text" th:field="*{password}" id="password"/>
   <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password with error</div>
   <br/>
+  <select id="editUserRoles" class="form-select" required
+          name="roles" multiple size="2">
+<!--    <option th:each="user: ${user.getRole()}"-->
+<!--            th:value="${user.getId()}">-->
+<!--      <th:block th:text="${user.getName()}">-->
+<!--      </th:block>-->
+<!--    </option>-->
+    <option th:each="user: ${user.getRole()}"
+            th:value="${user.getId()}">
+      <th:block th:text="${user.getName()}">
+      </th:block>
+    </option>
+
+  </select>
   <input type="submit" value="Update user!"/>
   <br/>
   <a th:href="@{/admin}">Выйти на главную</a>
