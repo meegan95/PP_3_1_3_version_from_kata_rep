@@ -22,20 +22,22 @@ Edit user:
   <input type="text" th:field="*{password}" id="password"/>
   <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password with error</div>
   <br/>
-  <select id="editUserRoles" class="form-select" required
-          name="roles" multiple size="2">
+<!--  <select id="editUserRoles" class="form-select" required-->
+<!--          name="roles" multiple size="2">-->
 <!--    <option th:each="user: ${user.getRole()}"-->
 <!--            th:value="${user.getId()}">-->
 <!--      <th:block th:text="${user.getName()}">-->
 <!--      </th:block>-->
 <!--    </option>-->
-    <option th:each="user: ${user.getRole()}"
-            th:value="${user.getId()}">
-      <th:block th:text="${user.getName()}">
-      </th:block>
-    </option>
-
-  </select>
+<!--  </select>-->
+  <div class="form-group">
+    <label for="roles" ><strong>Role</strong></label>
+    <select class="custom-select" name="roles" id="roles">
+      <option selected>Role</option>
+      <option value="1">ADMIN</option>
+      <option value="2">USER</option>
+    </select>
+  </div>
   <input type="submit" value="Update user!"/>
   <br/>
   <a th:href="@{/admin}">Выйти на главную</a>

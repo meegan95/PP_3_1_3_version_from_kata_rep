@@ -11,6 +11,7 @@ import ru.kata.spring.boot_security.demo.services.RolesService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,9 +28,12 @@ public class AdminController {
     }
 
 
+
     @GetMapping()
-    public String index(Model model) {
+    public String index(Model model, Principal principal) {
         model.addAttribute("users", userService.findAll());
+        model.addAttribute("admin", userService.getPersonByUsername(principal.getName()));
+        model.addAttribute("user", userService.getPersonByUsername(principal.getName()));
         model.addAttribute("allRoles", rolesService.getRoles());
         return "admin/index";
 
