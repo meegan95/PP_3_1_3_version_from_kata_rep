@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
@@ -24,10 +25,12 @@ public class AdminCreator {
 
     @Bean
     public void adminCreate(){
+        BCryptPasswordEncoder passwordEncoder = null;
         try {
             HashSet<Role> roles = new HashSet<>();
             roles.add(new Role("ROLE_ADMIN"));
             roles.add(new Role("ROLE_USER"));
+//           String password = passwordEncoder.encode("admin");
             usersRepository.save(new User("admin", 1999, "admin", roles));
         } catch (Exception e) {/*ignore*/}
     }
