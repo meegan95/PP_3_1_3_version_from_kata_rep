@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RegistrationService;
-import ru.kata.spring.boot_security.demo.services.RolesService;
 import ru.kata.spring.boot_security.demo.util.UsersValidator;
 
 
@@ -23,7 +22,7 @@ public class AuthController {
     private final RegistrationService registrationService;
 
     @Autowired
-    public AuthController(UsersValidator usersValidator, RegistrationService registrationService, RolesService rolesService) {
+    public AuthController(UsersValidator usersValidator, RegistrationService registrationService) {
         this.usersValidator = usersValidator;
         this.registrationService = registrationService;
     }
