@@ -19,7 +19,9 @@ Edit user:
   </div>
   <br/>
   <label for="password">Edit password: </label>
-  <input type="text" th:field="*{password}" id="password"/>
+  <input type="password" class=" mb-2 form-control" id="password"
+         th:name="password"
+         th:value="${user.password}">
   <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password with error</div>
   <br/>
   <div class="form-group">
