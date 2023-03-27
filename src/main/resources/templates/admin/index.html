@@ -14,7 +14,7 @@ All users:
     <a th:text="${user.getUsername()}">user</a>
     <a th:text="${user.getYearOfBirth()}">user</a>
 
-    <a th:text="${user.getRole()}">user</a>
+<!--    <a th:text="${user.getRole()}">user</a>-->
 
     <a th:href="@{/admin/{id}(id=${user.getId()})}" th:text=View>user</a>
 </div>
