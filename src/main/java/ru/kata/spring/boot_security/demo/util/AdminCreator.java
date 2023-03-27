@@ -3,7 +3,9 @@ package ru.kata.spring.boot_security.demo.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import ru.kata.spring.boot_security.demo.configs.WebSecurityConfig;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.RolesRepository;
@@ -25,13 +27,11 @@ public class AdminCreator {
 
     @Bean
     public void adminCreate(){
-        BCryptPasswordEncoder passwordEncoder = null;
         try {
             HashSet<Role> roles = new HashSet<>();
             roles.add(new Role("ROLE_ADMIN"));
             roles.add(new Role("ROLE_USER"));
-//           String password = passwordEncoder.encode("admin");
-            usersRepository.save(new User("admin", 1999, "admin", roles));
+            usersRepository.save(new User("admin", 1999,encodePassword("admin"), roles));
         } catch (Exception e) {/*ignore*/}
     }
     @Bean
@@ -39,7 +39,11 @@ public class AdminCreator {
         try {
             HashSet<Role> roles = new HashSet<>();
             roles.add(new Role("ROLE_USER"));
-            usersRepository.save(new User("user", 1999, "user", roles));
+            usersRepository.save(new User("user", 1999, encodePassword("user"), roles));
         } catch (Exception e) {/*ignore*/}
+    }
+
+    private String encodePassword(String password){
+       return new BCryptPasswordEncoder().encode(password);
     }
 }
