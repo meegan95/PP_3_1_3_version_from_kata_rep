@@ -34,10 +34,11 @@ public class UsersDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = usersRepository.findByUsername(username);
 
-        if (user == null) {
+        if (user.isEmpty()) {
             throw new UsernameNotFoundException("Username not found");
         }
-        return new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(), mapRolesToAuthorities(user.get().getRole()));
+        return new org.springframework.security.core.userdetails.User(user.get()
+                .getUsername(), user.get().getPassword(), mapRolesToAuthorities(user.get().getRole()));
     }
 
     private Set<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
