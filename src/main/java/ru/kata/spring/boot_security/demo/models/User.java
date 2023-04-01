@@ -23,6 +23,7 @@ public class User {
     @Min(value = 1900, message = "Год рожения должен быть больше, чем 1900")
     private int yearOfBirth;
     @Column(name = "password")
+    @NotEmpty(message = "Заполните пароль")
     private String password;
 
     @ManyToMany
@@ -56,6 +57,12 @@ public class User {
         this.username = username;
         this.yearOfBirth = yearOfBirth;
     }
+    public User(String username, int yearOfBirth, Set<Role> roles) {
+        this.username = username;
+        this.yearOfBirth = yearOfBirth;
+        this.roles = roles;
+    }
+
 
     public User(String username, int yearOfBirth, String password, Set<Role> roles) {
         this.username = username;
