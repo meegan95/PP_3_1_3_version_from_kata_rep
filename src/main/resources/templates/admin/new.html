@@ -6,28 +6,38 @@
     <title>New User</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/admin}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin/new}" th:object="${newUser}">
     <label for="username">Введите имя пользователя: </label>
-    <input type="text" th:field="*{username}" id="username"/>
+    <input type="text" th:field="*{username}" id="username" required/>
     <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
     <br/>
     <label for="yearOfBirth">Введите год рождения: </label>
-    <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth"/>
+    <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth" required/>
     <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">Year of birth Error
     </div>
     <br/>
     <label for="password">Введите пароль: </label>
-    <input type="password" th:field="*{password}" id="password"/>
+    <input type="password" th:field="*{password}" id="password" required/>
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
     <br/>
     <div class="form-group">
         <label for="roles" ><strong>Role</strong></label>
-        <select class="custom-select" name="roles" id="roles">
+        <select class="custom-select" name="roles" id="roles" required>
             <option selected>Role</option>
             <option value="1">ADMIN</option>
             <option value="2">USER</option>
         </select>
     </div>
+    <br>
+<!--    <label>Roles:-->
+<!--        <input type="checkbox" name="roles"-->
+<!--               th:each="role : ${allRoles}"-->
+<!--               th:text="${role.name}"-->
+<!--               th:value="${role.id}"-->
+<!--               th:field="*{role}"-->
+<!--        />-->
+<!--    </label>-->
+<!--    <br>-->
     <input type="submit" value="Sign up!"/>
 </form>
 

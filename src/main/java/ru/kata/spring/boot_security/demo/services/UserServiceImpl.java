@@ -5,10 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.UsersRepository;
+import ru.kata.spring.boot_security.demo.util.UsersValidator;
 
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -18,10 +22,12 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UsersRepository usersRepository;
+    private final UsersValidator usersValidator;
 
     @Autowired
-    public UserServiceImpl(UsersRepository usersRepository) {
+    public UserServiceImpl(UsersRepository usersRepository,UsersValidator usersValidator) {
         this.usersRepository = usersRepository;
+        this.usersValidator = usersValidator;
     }
 
     @Transactional
@@ -43,8 +49,10 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void save(User user) {
+        if (getPersonByUsername(user.getUsername()) == null){
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        usersRepository.save(user);
+        usersRepository.save(user);}
+        else return;
     }
 
     @Transactional
