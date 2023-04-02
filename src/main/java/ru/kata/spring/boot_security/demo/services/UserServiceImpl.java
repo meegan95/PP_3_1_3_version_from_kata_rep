@@ -58,6 +58,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void update(int id, User updatedUser) {
         updatedUser.setId(id);
+        if (getPersonByUsername(updatedUser.getUsername()).getPassword().equals(updatedUser.getPassword())) {
+            usersRepository.save(updatedUser);
+            return;
+        }
         updatedUser.setPassword(new BCryptPasswordEncoder().encode(updatedUser.getPassword()));
         usersRepository.save(updatedUser);
     }
