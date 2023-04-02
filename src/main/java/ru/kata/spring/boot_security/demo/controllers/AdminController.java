@@ -52,14 +52,6 @@ public class AdminController {
         return "admin/show";
     }
 
-    //    @GetMapping("/new")
-//    public String newUser(@ModelAttribute("user") User user) {
-//        return "admin/new";
-//    }
-//    @GetMapping("/new")
-//    public String newUser(@ModelAttribute("user") User user) {
-//        return "admin/new";
-//    }
     @GetMapping("/new")
     public String newUser( Model model) {
         User user = new User();
@@ -68,14 +60,6 @@ public class AdminController {
         model.addAttribute("allRoles", roles);
         return "admin/new";
     }
-
-//    @PostMapping("/new")
-//    public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
-////        usersValidator.validate(user, bindingResult);
-//        if (bindingResult.hasErrors()) return "/admin/new";
-//        userService.save(user, bindingResult);
-//        return "redirect:/admin";
-//    }
 
     @PostMapping("/new")
     public String saveUser(@ModelAttribute("newUser") @Valid User user, BindingResult bindingResult, Model model) {

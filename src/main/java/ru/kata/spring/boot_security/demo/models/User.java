@@ -20,7 +20,7 @@ public class User {
     @Size(min = 2, max = 100, message = "Имя пользователя должно быть от 2 до 100 символов длинной")
     private String username;
     @Column(name = "year_of_birth")
-//    @Min(value = 1900, message = "Год рожения должен быть больше, чем 1900")
+    @Min(value = 1900, message = "Год рожения должен быть больше, чем 1900")
     private int yearOfBirth;
     @Column(name = "password")
     @NotEmpty(message = "Заполните пароль")
@@ -53,10 +53,6 @@ public class User {
     public User() {
     }
 
-//    public User(String username, int yearOfBirth) {
-//        this.username = username;
-//        this.yearOfBirth = yearOfBirth;
-//    }
     public User(String username, int yearOfBirth, Set<Role> roles) {
         this.username = username;
         this.yearOfBirth = yearOfBirth;
